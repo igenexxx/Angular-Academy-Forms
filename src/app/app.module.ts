@@ -1,13 +1,14 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {forwardRef, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatMenuModule} from '@angular/material/menu';
-import {MatButtonModule} from '@angular/material/button'
+import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
+import { PasswordStrengthDirective } from './directives/password-strength.directive';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import {MatTabsModule} from '@angular/material/tabs';
@@ -24,6 +25,7 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatSortModule } from "@angular/material/sort";
 import { MatTableModule } from "@angular/material/table";
 import { MatToolbarModule } from "@angular/material/toolbar";
+import { OnlyOneErrorPipe } from './pipes/only-one-error.pipe';
 import {CoursesService} from "./services/courses.service";
 import {HttpClientModule} from "@angular/common/http";
 import {CourseResolver} from "./services/course.resolver";
@@ -58,7 +60,9 @@ import {LoginReactiveComponent} from './login-reactive/login-reactive.component'
         CreateCourseStep3Component,
         AddressFormComponent,
         FileUploadComponent,
-        LoginReactiveComponent
+        LoginReactiveComponent,
+        PasswordStrengthDirective,
+        OnlyOneErrorPipe,
     ],
     imports: [
         BrowserModule,

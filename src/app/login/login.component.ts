@@ -8,7 +8,10 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  initialValues = {
+    email: 'hello@example.com',
+    password: '1234567'
+  };
 
   constructor() {
 
