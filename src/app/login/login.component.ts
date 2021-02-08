@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -18,4 +19,7 @@ export class LoginComponent implements OnInit {
 
   }
 
+  login(loginForm: NgForm, submit): void {
+    console.log(loginForm.value, loginForm.valid, submit);
+  }
 }

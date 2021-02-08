@@ -2,26 +2,48 @@
   <mat-card-title>Login</mat-card-title>
   <mat-card-content>
 
-    <form class="login-form data-form">
-
+    <form #loginForm="ngForm" class="login-form data-form" (ngSubmit)="login(loginForm, $event)">
       <mat-form-field>
+        <input
+          matInput
+          ngModel
+          #email="ngModel"
+          name="email"
+          placeholder="Email"
+          type="email"
+          required
+          minlength="3"
+          maxlength="30"
+        >
 
-        <input matInput type="email" name="email"
-               placeholder="Email">
+        <mat-error *ngIf="email.errors?.required">The email is mandatory.</mat-error>
+        <mat-error *ngIf="email.errors?.minlength">
+          Your email must have minimum {{ email.errors.minlength.requiredLength }} chars, but it only has
+          {{ email.errors.minlength.actualLength }}.
+        </mat-error>
+        <mat-error *ngIf="email.errors?.email">This is not a valid email.</mat-error>
 
       </mat-form-field>
 
       <mat-form-field>
-
-        <input matInput type="password" placeholder="Password">
-
+        <input
+          matInput
+          ngModel
+          #password="ngModel"
+          name="password"
+          placeholder="Password"
+          type="password"
+          required
+        >
       </mat-form-field>
 
-      <button mat-raised-button color="primary">
-        Login
-      </button>
-
+      <button color="primary" type="submit" mat-raised-button [disabled]="!loginForm.valid">Login</button>
     </form>
 
+    <div>
+      <pre>
+        {{  email.errors | json }}
+      </pre>
+    </div>
   </mat-card-content>
 </mat-card>
