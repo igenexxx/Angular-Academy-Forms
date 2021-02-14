@@ -13,10 +13,7 @@ export class LoginComponent implements OnInit {
     password: '1234567'
   };
 
-  constructor() {
-
-
-  }
+  constructor() {}
 
   ngOnInit() {
 
