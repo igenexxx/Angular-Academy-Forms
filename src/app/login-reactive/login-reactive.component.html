@@ -2,19 +2,39 @@
   <mat-card-title>Login (Reactive)</mat-card-title>
   <mat-card-content>
 
-    <form class="login-form data-form">
+    <form [formGroup]="form" class="login-form data-form">
       <mat-form-field>
-        <input matInput type="email" name="email" placeholder="Email">
+        <input formControlName="email" matInput name="email" placeholder="Email" type="email">
+
+        <mat-error *ngIf="email.errors?.required">The email is mandatory.</mat-error>
+        <mat-error *ngIf="email.errors?.minlength">
+          Your email must have minimum {{ email.errors.minlength.requiredLength }} chars, but it only has
+          {{ email.errors.minlength.actualLength }}.
+        </mat-error>
+        <mat-error *ngIf="email.errors?.email">This is not a valid email.</mat-error>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput type="password" placeholder="Password">
+        <input formControlName="password" matInput placeholder="Password" type="password">
+
+        <mat-error *ngIf="password.errors?.required">The password is mandatory.</mat-error>
       </mat-form-field>
 
-      <button mat-raised-button color="primary">
-        Login
-      </button>
+      <ng-container *ngIf="password.errors | onlyOneError:['minlength', 'passwordStrength'] as error">
+        <div *ngIf="error?.passwordStrength" class="field-message">
+          Your password must have lower case, upper case and numeric characters.
+        </div>
+        <div *ngIf="error?.minlength" class="field-message">
+          Your email must have minimum {{ error.minlength.requiredLength }} chars, but it only has
+          {{ error.minlength.actualLength }}.
+        </div>
+      </ng-container>
+
+      <button [disabled]="!form.valid" color="primary" mat-raised-button>Login</button>
     </form>
+
+    <div class="form-val">{{ form.value | json }}</div>
+    <div class="form-val">{{ form.valid }}</div>
 
   </mat-card-content>
 </mat-card>
