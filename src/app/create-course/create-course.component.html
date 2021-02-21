@@ -9,12 +9,21 @@
       <button color="primary" mat-raised-button matStepperNext>Continue to Step 2</button>
     </mat-step>
 
-    <mat-step errorMessage="Pricing in error">
-      <create-course-step-2></create-course-step-2>
+    <mat-step [stepControl]="step2.form" errorMessage="Pricing in error">
+      <create-course-step-2 #step2></create-course-step-2>
       <ng-template matStepLabel>course pricing details</ng-template>
       <div class="stepper-buttons">
         <button mat-raised-button matStepperPrevious>Back</button>
         <button color="primary" mat-raised-button matStepperNext>Continue to Step 3</button>
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="step3.form" errorMessage="Course lessons in error">
+      <ng-template matStepLabel>course lessons</ng-template>
+      <create-course-step-3 #step3></create-course-step-3>
+      <div class="stepper-buttons">
+        <button mat-raised-button matStepperPrevious>Back</button>
+        <button [disabled]="!step3.form.valid" color="primary" mat-raised-button>Create Course</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>
