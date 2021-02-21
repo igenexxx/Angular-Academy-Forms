@@ -23,7 +23,13 @@
       <create-course-step-3 #step3></create-course-step-3>
       <div class="stepper-buttons">
         <button mat-raised-button matStepperPrevious>Back</button>
-        <button [disabled]="!step3.form.valid" color="primary" mat-raised-button>Create Course</button>
+        <button
+          (click)="submit(step1.form.value, step2.form.value, step3.form.value)"
+          [disabled]="!step3.form.valid || step3.lessons.length"
+          color="primary"
+          mat-raised-button
+        >Create Course
+        </button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>
